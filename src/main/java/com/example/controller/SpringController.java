@@ -19,7 +19,8 @@ public class SpringController {
     public String index(){
         return "template";
     }
-    @RequestMapping
+
+    @RequestMapping("/list")
     public String list(Model model){
         List<Book> list = mapper.bookList();
         model.addAttribute("list",list);
