@@ -19,6 +19,8 @@
             let row = button.closest("tr");
             let title = row.querySelector("td:nth-child(2)").textContent;
             document.getElementById("searchTitle").textContent="Selected Book Title:" + title;
+            let url = "${cpath}/search/books?title=" + encodeURIComponent(title);
+
         }
     </script>
 </head>
