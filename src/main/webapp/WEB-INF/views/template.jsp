@@ -60,7 +60,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card-footer text-center">Java Spring Full Stack Developer(박매일)</div>
+            <div class="card-footer text-center">Java Spring Full Stack Developer</div>
         </div>
 
     </div>
