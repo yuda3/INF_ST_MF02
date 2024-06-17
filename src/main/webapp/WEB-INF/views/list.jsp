@@ -15,6 +15,13 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        //save button click handler
+        document.addEventListner("click", function(e){
+            if(e.target && e.target.classList.contains("save-btn")){
+
+            }
+        });
+
         function showTitle(button){
             let row = button.closest("tr");
             let title = row.querySelector("td:nth-child(2)").textContent;
@@ -32,13 +39,36 @@
                     const resultsContainer = document.querySelector('#bookList');
                     resultsContainer.innerHTML='';
                     data.documents.forEach(book =>{
-                        const{title,price,isbn,publisher,thumbnail, url} = book;
+                        const { authors, title, price, isbn, publisher, thumbnail,  url} = book;
                         const bookInfo = document.createElement('div');
                         bookInfo.classList.add("book-info");
                         bookInfo.style.border='1px solid #ddd';
                         bookInfo.style.margin = '10px 0';
                         bookInfo.style.padding='10px';
-                        bookInfo.innerHTML=price+":"+isbn+":"+publisher+":" + "<a href='"+url+"'>"+title+"</a><img src=" + thumbnail + "/>"
+                        var html="<table class='table'>";
+                        html+="<tr>";
+                        html += "<td>저자 <button type='button' class='btn btn-sm btn-success save-btn' onclick='goSave(\"" + isbn + "\")'>저장</button></td>";
+                        html += "<td id='a" + isbn + "'>" + authors + "</td>";
+                        html+="</tr>";
+                        html+="<tr>";
+                        html+="<td>제목</td>";
+                        html+="<td id='t"+isbn+"'><a href="+url+">"+title+"</a></td>";
+                        html+="</tr>";
+                        html+="<tr>";
+                        html+="<td>가격</td>";
+                        html+="<td id='p"+isbn+"'>"+price+"</td>";
+                        html+="</tr>";
+                        html+="<tr>";
+                        html+="<td>출판사</td>";
+                        html+="<td id='pu"+isbn+"'>"+publisher+"</td>";
+                        html+="</tr>";
+                        html+="<tr>";
+                        html+="<td colspan='2'><img src="+thumbnail+"/></td>";
+                        html+="</tr>";
+                        html+="</table>";
+                        bookInfo.innerHTML=html;
+
+                        //bookInfo.innerHTML=price+":"+isbn+":"+publisher+":" + "<a href='"+url+"'>"+title+"</a><img src=" + thumbnail + "/>"
                         resultsContainer.appendChild(bookInfo);
                     });
                 })
