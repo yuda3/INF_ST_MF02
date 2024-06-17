@@ -16,55 +16,23 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-
-<div class="container-fluid mt-3">
-    <h1>Java Spring Full Stack Developer</h1>
-    <p>Resize the browser window to see the effect.</p>
-    <p>The first, second and third row will automatically stack on top of each other when the screen is less than 576px wide.</p>
-
-    <div class="container-fluid">
-
-        <div class="card">
-            <div class="card-header">Java Spring Framework</div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-sm-2 mb-2">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Left</h4>
-                                <p class="card-text">Some example text. Some example text.</p>
-                                <a href="#" class="card-link">Card link</a>
-                                <a href="#" class="card-link">Another link</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-7 mb-2">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Main</h4>
-                                <p class="card-text">Some example text. Some example text.</p>
-                                <a href="#" class="card-link">Card link</a>
-                                <a href="#" class="card-link">Another link</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Right</h4>
-                                <p class="card-text">Some example text. Some example text.</p>
-                                <a href="#" class="card-link">Card link</a>
-                                <a href="#" class="card-link">Another link</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card-footer text-center">Java Spring Full Stack Developer(박매일)</div>
-        </div>
-
-    </div>
-</div>
-
+    <table border="1">
+        <tr>
+            <td>NUMBER</td>
+            <td>TITLE</td>
+            <td>PRICE</td>
+            <td>AUTHOR</td>
+            <td>PAGE</td>
+        </tr>
+        <c:forEach var="book" items="${list}">
+            <tr>
+                <td>${book.num}</td>
+                <td>${book.title}</td>
+                <td>${book.price}</td>
+                <td>${book.author}</td>
+                <td>${book.page}</td>
+            </tr>
+        </c:forEach>
+    </table>
 </body>
 </html>
