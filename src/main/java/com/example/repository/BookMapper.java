@@ -1,12 +1,11 @@
 package com.example.repository;
 
 import com.example.entity.Book;
-import org.springframework.stereotype.Repository;
-
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
-@Repository
+@Mapper
 public interface BookMapper {
-    public List<Book> bookList();
+    List<Book> bookList();
 }
