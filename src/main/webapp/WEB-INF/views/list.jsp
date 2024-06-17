@@ -29,6 +29,18 @@
                 })
                 .then(data =>{
                     console.log(data);
+                    const resultsContainer = document.querySelector('#bookList');
+                    resultsContainer.innerHTML='';
+                    data.documents.forEach(book =>{
+                        const{title,price,isbn,publisher,thumbnail, url} = book;
+                        const bookInfo = document.createElement('div');
+                        bookInfo.classList.add("book-info");
+                        bookInfo.style.border='1px solid #ddd';
+                        bookInfo.style.margin = '10px 0';
+                        bookInfo.style.padding='10px';
+                        bookInfo.innerHTML=price+":"+isbn+":"+publisher+":" + "<a href='"+url+"'>"+title+"</a><img src=" + thumbnail + "/>"
+                        resultsContainer.appendChild(bookInfo);
+                    });
                 })
                 .catch(error => {
                    console.log(error);
@@ -96,8 +108,7 @@
                             <div class="card-body">
                                 <h4 class="card-title">Result</h4>
                                 <p class="card-text" id="searchTitle"></p>
-                                <a href="#" class="card-link">Card link</a>
-                                <a href="#" class="card-link">Another link</a>
+                                <div id="bookList"></div>
                             </div>
                         </div>
                     </div>
