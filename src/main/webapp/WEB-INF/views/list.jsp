@@ -20,7 +20,19 @@
             let title = row.querySelector("td:nth-child(2)").textContent;
             document.getElementById("searchTitle").textContent="Selected Book Title:" + title;
             let url = "${cpath}/search/books?title=" + encodeURIComponent(title);
-
+            fetch(url)
+                .then(response => {
+                   if(response.ok){
+                       return response.json();
+                   }
+                   throw new Error("error");
+                })
+                .then(data =>{
+                    console.log(data);
+                })
+                .catch(error => {
+                   console.log(error);
+                });
         }
     </script>
 </head>
