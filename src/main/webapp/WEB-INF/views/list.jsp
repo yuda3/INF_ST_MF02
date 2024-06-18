@@ -148,8 +148,10 @@
                                             <td><button class="btn btn-sm btn-info" onclick="showTitle(this)">Search</button></td>
                                         </tr>
                                     </c:forEach>
+                                    <button class="btn btn-sm-success">Register</button>
                                     </tbody>
                                 </table>
+                                <button class="btn btn-sm-success" onclick="location.href='${cpath}/register'">Register</button>
                             </div>
                         </div>
                     </div>
