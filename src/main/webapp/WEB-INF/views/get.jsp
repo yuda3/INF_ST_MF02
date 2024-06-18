@@ -45,7 +45,6 @@
                                 <h4 class="card-title">Detail</h4>
                                 <p class="card-text"><span class="badge badge-primary">${book.title}</span></p>
                                 <div class="card">
-                                    <img class="card-img-top" src="img_avatar1.png" alt="Card image">
                                     <div class="card-body">
                                         <h4 class="card-title">${book.title}</h4>
                                         <p class="card-text"><span class="badge badge-dark">Price</span> : ${book.price} /
@@ -57,6 +56,8 @@
                                             <a href="${book.num}" class="btn btn-secondary btn-sm">Delete</a>
                                         </div>
                                     </div>
+                                    <button class="btn btn-sm btn-primary form-control" onclick="bookSearch('${book.title}')">KYOBO SEARCH</button>
+                                    <div class="kyobo"></div>
                                 </div>
                             </div>
                         </div>
@@ -97,7 +98,65 @@
             }
         }
     });
+    function bookSearch(title) {
+        let url = "${cpath}/kysearch?title=" + encodeURIComponent(title);
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
+                return response.text();
+            })
+            .then(data => {
+                // HTML 데이터를 DOMParser를 사용하여 파싱합니다.
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(data, "text/html");
 
+                // 이제 'doc'는 HTML 문서로 작업할 수 있는 Document 객체입니다.
+                // 위에서 제공된 책 정보 추출 코드를 여기에 삽입하고,
+                // 'document' 대신 'doc'을 사용하여 쿼리합니다.
+                const books = [];
+                doc.querySelectorAll('.prod_item').forEach((item) => {
+                    const book = {};
+                    const linkElement = item.querySelector('a.prod_info'); // 클래스 이름을 실제 HTML에 맞게 조정
+                    book.url = linkElement ? linkElement.href : '';
+                    const titleElement = item.querySelector('.prod_name_group span:not(.prod_category)');
+                    book.title = titleElement ? titleElement.textContent.trim() : '';
+                    const authorElement = item.querySelector('.prod_author_group .author');
+                    book.author = authorElement ? authorElement.textContent.trim() : '';
+                    const publisherElement = item.querySelector('.prod_author_group .publish');
+                    book.publisher = publisherElement ? publisherElement.textContent.trim() : '';
+                    const priceElement = item.querySelector('.prod_price .price .val');
+                    book.price = priceElement ? priceElement.textContent.trim() : '';
+                    const reviewScoreElement = item.querySelector('.review_summary_wrap .review_klover_text');
+                    book.reviewScore = reviewScoreElement ? reviewScoreElement.textContent.trim() : '';
+                    books.push(book);
+                });
+                // 결과 확인
+                console.log(books);
+                // Card 형태로 출력
+                updateUIWithBooks(books);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
+
+    function updateUIWithBooks(books) {
+        const container = document.querySelector('.kyobo'); // 또는 책 정보를 추가할 다른 컨테이너 선택
+        books.forEach(sbook => {
+            let cardHTML ="";
+            cardHTML+="<div class='card mt-2'>";
+            cardHTML+="<div class='card-body'>";
+            cardHTML+="<h5 class='card-title'>"+sbook.title+"</h5>";
+            cardHTML+="<p class='card-text'>"+sbook.author+"/ "+sbook.publisher+"</p>";
+            cardHTML+="<p class='card-text'>"+sbook.price+"</p>";
+            cardHTML+="<p class='card-text'>"+sbook.reviewScore+"</p>";
+            cardHTML+="<a href='"+sbook.url+"' class='btn btn-primary'>상세보기</a>";
+            cardHTML+="</div>";
+            container.innerHTML += cardHTML; // 컨테이너에 카드 추가
+        });
+    }
 </script>
 </body>
 </html>
