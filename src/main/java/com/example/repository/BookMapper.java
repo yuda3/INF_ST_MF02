@@ -9,4 +9,6 @@ import java.util.List;
 public interface BookMapper {
     List<Book> bookList();
     void saveBook(Book dto);
+    void registerBook(Book dto);
+
 }

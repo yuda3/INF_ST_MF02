@@ -43,8 +43,26 @@
                             <div class="card-body">
                                 <h4 class="card-title">Register</h4>
                                 <p class="card-text">Some example text. Some example text.</p>
-                                <a href="#" class="card-link">Card link</a>
-                                <a href="#" class="card-link">Another link</a>
+                                <form action="${cpath}/register" method="post">
+                                    <div class="form-group">
+                                        <label for="title">Title :</label>
+                                        <input type="text" class="form-control" placeholder="Enter Title" id="title" name="title">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="price">Price :</label>
+                                        <input type="text" class="form-control" placeholder="Enter Price" id="price" name="price">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="author">Author :</label>
+                                        <input type="text" class="form-control" placeholder="Enter Author" id="author" name="author">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="page">Page :</label>
+                                        <input type="text" class="form-control" placeholder="Enter Page" id="page" name="page">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Register</button>
+                                    <button type="reset" class="btn btn-primary">Cancel</button>
+                                </form>
                             </div>
                         </div>
                     </div>
