@@ -3,6 +3,8 @@ package com.example.controller;
 import com.example.entity.Book;
 import com.example.repository.BookMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,8 +26,13 @@ public class SpringRestController {
 
     @RequestMapping("/restlist")
     public List<Book> list(){
-        List<Book> list = mapper.bookList();
-        return list;
+        return mapper.bookList();
+    }
+
+    @PostMapping("/restsave")
+    public String saveBook(@RequestBody Book dto){
+        mapper.saveBook(dto);
+        return "success";
     }
 
 }

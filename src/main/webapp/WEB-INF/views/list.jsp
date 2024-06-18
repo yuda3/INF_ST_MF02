@@ -15,12 +15,32 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        //save button click handler
-        document.addEventListner("click", function(e){
-            if(e.target && e.target.classList.contains("save-btn")){
+        function goSave(isbn){
+            let authorsElement = document.getElementById("a" + isbn);
+            let authors = authorsElement.textContent;
 
-            }
-        });
+            let titleElement = document.getElementById("t" + isbn);
+            let title = titleElement.textContent;
+
+            let priceElement = document.getElementById("p" + isbn);
+            let price = priceElement.textContent;
+            const url = "${cpath}/restsave";
+
+            fetch(url, {
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json",
+                },
+                body:JSON.stringify({title,price,authors})
+            })
+                .then(response => response.text())
+                .then(data=>{
+                    console.log(data)
+                    location.href="${cpath}/list";
+                }).catch(error => {
+                console.log(error)
+            });
+        }
 
         function showTitle(button){
             let row = button.closest("tr");

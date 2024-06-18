@@ -8,4 +8,5 @@ import java.util.List;
 @Mapper
 public interface BookMapper {
     List<Book> bookList();
+    void saveBook(Book dto);
 }

@@ -8,7 +8,7 @@
     </select>
 
     <insert id="saveBook" parameterType="com.example.entity.Book">
-        INSERT INTO BOOK(TITLE, PRICE, AUTHOR, PAGE)
-        VALUES(#{title} , #{price}, #{author}, 500)
+        INSERT INTO BOOK(title, price, author, page)
+        VALUES(#{title}, #{price}, #{author}, 500)
     </insert>
 </mapper>
