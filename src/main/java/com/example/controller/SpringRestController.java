@@ -3,6 +3,8 @@ package com.example.controller;
 import com.example.entity.Book;
 import com.example.repository.BookMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,23 +19,24 @@ public class SpringRestController {
     BookMapper mapper;
 
     @RequestMapping("/rest")
-    public List<String> rest(){
+    public ResponseEntity<?> rest(){
         List<String> list = new ArrayList<>();
         list.add("spring");
         list.add("do");
         list.add("well");
-        return list;
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @RequestMapping("/restlist")
-    public List<Book> list(){
-        return mapper.bookList();
+    public ResponseEntity<?> list(){
+        List<Book> books = mapper.bookList();
+        return new ResponseEntity<>(books, HttpStatus.ACCEPTED);
     }
 
     @PostMapping("/restsave")
-    public String saveBook(@RequestBody Book dto){
+    public ResponseEntity<?> saveBook(@RequestBody Book dto){
         mapper.saveBook(dto);
-        return "success";
+        return new ResponseEntity<>("success", HttpStatus.NOT_FOUND);
     }
 
 }
