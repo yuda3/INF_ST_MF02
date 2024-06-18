@@ -48,4 +48,21 @@ public class SpringController {
         return "get";
     }
 
+    @GetMapping("/remove/{num}")
+    public String remove(@PathVariable int num){
+        mapper.remove(num);
+        return "redirect:/list";
+    }
+    @GetMapping("/update/{num}")
+    public String updateGet(@PathVariable int num, Model model){
+        Book book = mapper.get(num);
+        model.addAttribute("book",book);
+        return "update";
+    }
+    @PostMapping("/update")
+    public String updatePost(Book dto){
+        mapper.update(dto);
+        return "redirect:/get/" +dto.getNum();
+
+    }
 }

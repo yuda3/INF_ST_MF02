@@ -21,4 +21,13 @@
     <select id="get" resultType="com.example.entity.Book">
         SELECT * from BOOK WHERE NUM = #{num}
     </select>
+
+    <update id="update" parameterType="com.example.entity.Book">
+        UPDATE BOOK set TITLE = #{title}, PRICE = #{price}, AUTHOR = #{author}, PAGE = #{page}
+        WHERE NUM = #{num}
+    </update>
+
+    <delete id="remove">
+        DELETE FROM BOOK WHERE NUM = #{num}
+    </delete>
 </mapper>

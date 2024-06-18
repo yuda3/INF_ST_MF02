@@ -15,7 +15,6 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-
 <body>
 
 <div class="container-fluid mt-3">
@@ -42,22 +41,30 @@
                     <div class="col-sm-7 mb-2">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Detail</h4>
-                                <p class="card-text"><span class="badge badge-primary">${book.title}</span></p>
-                                <div class="card">
-                                    <img class="card-img-top" src="img_avatar1.png" alt="Card image">
-                                    <div class="card-body">
-                                        <h4 class="card-title">${book.title}</h4>
-                                        <p class="card-text"><span class="badge badge-dark">Price</span> : ${book.price} /
-                                            <span class="badge badge-dark">Author</span> : ${book.author} /
-                                            <span class="badge badge-dark">Page</span> : ${book.page}</p>
-                                        <div id="atag">
-                                            <a href="#" class="btn btn-secondary btn-sm">List</a>
-                                            <a href="${book.num}" class="btn btn-secondary btn-sm">Modify</a>
-                                            <a href="${book.num}" class="btn btn-secondary btn-sm">Delete</a>
-                                        </div>
+                                <h4 class="card-title">Modify</h4>
+                                <p class="card-text">Some example text. Some example text.</p>
+                                <form action="${cpath}/update" method="post">
+                                    <input type="hidden" name="num" value="${book.num}"/>
+                                    <div class="form-group">
+                                        <label for="title">Title :</label>
+                                        <input type="text" class="form-control" value="${book.title}" id="title" name="title">
                                     </div>
-                                </div>
+                                    <div class="form-group">
+                                        <label for="price">Price :</label>
+                                        <input type="text" class="form-control" value="${book.price}" id="price" name="price">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="author">Author :</label>
+                                        <input type="text" class="form-control" value="${book.author}" id="author" name="author">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="page">Page :</label>
+                                        <input type="text" class="form-control" value="${book.page}" id="page" name="page">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Modify</button>
+                                    <button type="submit" class="btn btn-primary" onclick="location.href='${cpath}/list'">List</button>
+                                    <button type="reset" class="btn btn-primary">Cancel</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -78,26 +85,6 @@
 
     </div>
 </div>
-<script>
-    document.getElementById("atag").addEventListener("click", function (event){
-        event.preventDefault();
-        let target = event.target;
-        if(target.tagName ==="A"){
-            let href = target.getAttribute("href");
-            if(href === "#"){
-                location.href="${cpath}/list";
-            }else {
-                let num = href;
-                if(target.textContent==="Modify"){
-                    location.href="${cpath}/update/"+num;
-                }else if(target.textContent==="Delete"){
-                    location.href="${cpath}/remove/"+num;
-                }
 
-            }
-        }
-    });
-
-</script>
 </body>
 </html>
