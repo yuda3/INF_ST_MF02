@@ -15,6 +15,27 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
+<script>
+    document.getElementById("atag").addEventListener("click", function (event){
+        event.preventDefault();
+        let target = event.target;
+        if(target.tagName ==="A"){
+            let href = target.getAttribute("href");
+            if(href === "#"){
+                location.href="${cpath}/list";
+            }else {
+                let num = href;
+                if(target.textContent==="Modify"){
+                    location.href="${cpath}/update/"+num;
+                }else if(target.textContent==="Delete"){
+                    location.href="${cpath}/remove/"+num;
+                }
+
+            }
+        }
+    });
+
+</script>
 <body>
 
 <div class="container-fluid mt-3">
@@ -50,9 +71,11 @@
                                         <p class="card-text"><span class="badge badge-dark">Price</span> : ${book.price} /
                                             <span class="badge badge-dark">Author</span> : ${book.author} /
                                             <span class="badge badge-dark">Page</span> : ${book.page}</p>
-                                        <a href="#" class="btn btn-secondary btn-sm">List</a>
-                                        <a href="#" class="btn btn-secondary btn-sm">Modify</a>
-                                        <a href="#" class="btn btn-secondary btn-sm">Delete</a>
+                                        <div id="atag">
+                                            <a href="#" class="btn btn-secondary btn-sm">List</a>
+                                            <a href="${book.num}" class="btn btn-secondary btn-sm">Modify</a>
+                                            <a href="${book.num}" class="btn btn-secondary btn-sm">Delete</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
