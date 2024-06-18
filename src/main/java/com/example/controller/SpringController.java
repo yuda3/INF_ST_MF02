@@ -5,10 +5,7 @@ import com.example.repository.BookMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -36,7 +33,7 @@ public class SpringController {
     }
 
     @PostMapping("/register")
-    public String registerPost(Book dto){
+    public String registerPost(@RequestBody Book dto){
         mapper.registerBook(dto);
         return "redirect:/list";
     }
@@ -63,6 +60,10 @@ public class SpringController {
     public String updatePost(Book dto){
         mapper.update(dto);
         return "redirect:/get/" +dto.getNum();
+    }
 
+    @RequestMapping("/jsonList")
+    public @ResponseBody List<Book> jsonList(){
+        return mapper.bookList();
     }
 }

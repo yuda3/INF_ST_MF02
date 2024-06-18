@@ -15,6 +15,7 @@ import java.util.List;
 public class SpringRestController {
     @Autowired
     BookMapper mapper;
+
     @RequestMapping("/rest")
     public List<String> rest(){
         List<String> list = new ArrayList<>();
