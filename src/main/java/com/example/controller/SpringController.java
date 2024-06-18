@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -39,4 +40,12 @@ public class SpringController {
         mapper.registerBook(dto);
         return "redirect:/list";
     }
+
+    @GetMapping("/get/{num}")
+    public String get(@PathVariable int num, Model model){
+        Book book = mapper.get(num);
+        model.addAttribute("book", book);
+        return "get";
+    }
+
 }

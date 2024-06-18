@@ -17,4 +17,8 @@
         INSERT INTO BOOK(title, price, author, page)
         VALUES(#{title},#{price}, #{author}, #{page})
     </insert>
+
+    <select id="get" resultType="com.example.entity.Book">
+        SELECT * from BOOK WHERE NUM = #{num}
+    </select>
 </mapper>
